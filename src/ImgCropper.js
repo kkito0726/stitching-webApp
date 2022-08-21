@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { BrowserRouter, Route, Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import "./ImgCropper.css"
@@ -12,8 +12,6 @@ export const ImgCropper = () => {
   const [imageRef, setImageRef] = useState(null);
   const [crop, setCrop] = useState({unit: "%", width: 30})
   const [croppedImageUrl, setcroppedImageUrl] = useState(InitImg);
-
- 
 
   const onCropComplete = (crop) => {
     makeClientCrop(crop);
@@ -89,17 +87,20 @@ export const ImgCropper = () => {
                 crop={crop}
                 ruleOfThirds
                 onImageLoaded={setImageRef}
-                onComplete={onCropComplete}
                 onChange={setCrop}
                 style={{width: "60%"}}
               />
             )}
+            <br />
+            <button type='button' className='button' onClick={() => onCropComplete(crop)}>
+              画像を切り取る
+            </button>
           </div>
           <br />
           <div className='cropBox'>
             <h2>5. 完成イメージはこちらに表示されます</h2>
             {croppedImageUrl && (
-              <img alt="Crop" style={{ width: "60%" }} src={croppedImageUrl} id="cropImg" />
+              <img alt="Crop" style={{ width: "75%" }} src={croppedImageUrl} id="cropImg" />
             )}
           </div>
         </div>
