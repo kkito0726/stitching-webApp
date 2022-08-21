@@ -3,12 +3,15 @@ import { useState } from 'react';
 import { BrowserRouter, Route, Link, useLocation } from 'react-router-dom'
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+import "./ImgCropper.css"
+
+import InitImg from "./initImg.png"
 
 export const ImgCropper = () => {
   const src = useLocation().state;
   const [imageRef, setImageRef] = useState(null);
   const [crop, setCrop] = useState({unit: "%", width: 30})
-  const [croppedImageUrl, setcroppedImageUrl] = useState(null);
+  const [croppedImageUrl, setcroppedImageUrl] = useState(InitImg);
 
  
 
@@ -76,9 +79,10 @@ export const ImgCropper = () => {
   return (
     <div className='App'>
       <div className='outerBox'>
-        <h1>無駄な部分をトリミングする</h1>
-          <div className='imageUplodeBox'>
-            <h2>4. 必要な領域をドラッグで選択する [ 何度でも選択可能 ]</h2>
+      <h1>無駄な部分をトリミングする</h1>
+        <div style={{display: "flex"}}>
+          <div className='cropBox'>
+            <h2>4. 必要な領域をドラッグで選択する<br />[ 何度でも選択可能 ]</h2>
             {src && (
               <ReactCrop
                 src={src}
@@ -92,12 +96,15 @@ export const ImgCropper = () => {
             )}
           </div>
           <br />
-          <div className='imageUplodeBox'>
+          <div className='cropBox'>
             <h2>5. 完成イメージはこちらに表示されます</h2>
             {croppedImageUrl && (
-              <img alt="Crop" style={{ width: "60%" }} src={croppedImageUrl} />
+              <img alt="Crop" style={{ width: "60%" }} src={croppedImageUrl} id="cropImg" />
             )}
           </div>
+        </div>
+        
+          
           <Link to="/" className='button'>トップページに戻る</Link>
       </div>
       
