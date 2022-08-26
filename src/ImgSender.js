@@ -17,7 +17,7 @@ export const ImgSender = ({image}) => {
     });
 
     const sendPath = () => {
-        const url = "http://127.0.0.1:5000/stitch";
+        const url = "https://stitching-server.herokuapp.com/stitch";
         const sendData = {
             mode: mode,
             image: image,
