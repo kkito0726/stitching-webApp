@@ -4,14 +4,14 @@ import cv2, base64, io
 import numpy as np
 from stitch import stitch
 
-app = Flask(__name__)
-CORS(app) 
+application = Flask(__name__)
+CORS(application) 
 
-@app.route("/", methods=['GET'])
+@application.route("/", methods=['GET'])
 def index():
-   return "Server!"
+   return '''<h1>Sever!!</h1>'''
 
-@app.route("/stitch", methods=['GET','POST'])
+@application.route("/stitch", methods=['GET','POST'])
 def parse():
     if request.method == "POST":
         json = request.get_json()
@@ -47,5 +47,5 @@ def parse():
         return make_response(jsonify(res))
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run(host='127.0.0.1', port=5000)
+    application.debug = True
+    application.run(host='127.0.0.1', port=5000)
